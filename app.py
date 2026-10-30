@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from io import BytesIO
+from pathlib import Path
 
 import pandas as pd
 import plotly.express as px
@@ -20,6 +21,7 @@ NAVY = "#14283F"
 TEAL = "#168C8C"
 GOLD = "#E3A23B"
 MUTED = "#687789"
+DEFAULT_DATA = Path(__file__).parent / "data" / "realistic_e_commerce_sales_data.csv"
 
 
 def load_data(file_bytes: bytes) -> pd.DataFrame:
@@ -83,8 +85,7 @@ st.markdown(
 
 with st.sidebar:
     st.header("Load the data")
-    upload = st.file_uploader("Upload the source CSV", type=["csv"])
-    st.caption("Expected file: `realistic_e_commerce_sales_data.csv`.")
+    upload = st.file_uploader("Upload a different CSV (optional)", type=["csv"])
     st.link_button(
         "Open dataset source",
         "https://www.kaggle.com/datasets/brsahan/e-commerce-dataset/data?select=realistic_e_commerce_sales_data.csv",
@@ -92,27 +93,15 @@ with st.sidebar:
     )
     st.divider()
     if upload is None:
-        st.caption("No CSV is bundled with this app. Upload the source file to explore the dashboard, and check its terms before reuse.")
+        st.caption("The project dataset is loaded automatically. You can upload a different CSV to explore it instead.")
     else:
-        st.caption(f"Loaded `{upload.name}` for this session. The CSV is not stored in this GitHub repository.")
-
-if upload is None:
-    st.info("Upload the CSV in the sidebar to explore the dashboard.")
-    st.subheader("What you can explore")
-    intro_cols = st.columns(3)
-    intro_cols[0].markdown("**Sales over time**\n\nCompare monthly item-sales totals and categories.")
-    intro_cols[1].markdown("**Customer and region views**\n\nFilter age groups and regions while keeping missing values visible.")
-    intro_cols[2].markdown("**Shipping outcomes**\n\nReview shipping statuses and descriptive return-row rates.")
-    st.markdown(
-        '<p class="note">This project uses synthetic data. Results are descriptive and should not be interpreted as evidence about a real retailer.</p>',
-        unsafe_allow_html=True,
-    )
-    st.stop()
+        st.caption(f"Using your uploaded file `{upload.name}` for this session.")
 
 try:
-    data = load_data(upload.getvalue())
+    file_bytes = upload.getvalue() if upload is not None else DEFAULT_DATA.read_bytes()
+    data = load_data(file_bytes)
 except Exception as exc:  # Show actionable input feedback in the app.
-    st.error(f"Could not read this file: {exc}")
+    st.error(f"Could not load the dataset: {exc}")
     st.stop()
 
 if data.empty:
