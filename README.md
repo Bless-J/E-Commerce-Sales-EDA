@@ -38,7 +38,7 @@ The dataset has 1,000 rows and appears synthetic. It contains no order ID, profi
 
 ## Interactive dashboard
 
-Run the dashboard locally with `streamlit run app.py`, then upload the source CSV in the sidebar. The dashboard includes date, region, category, and age-group filters; sales summary metrics; interactive monthly, category, region, and shipping charts; and a filtered record table. The CSV is not included in this repository, so users need to obtain it from the linked source and check its current reuse terms.
+Try the [live Streamlit dashboard](https://ecommerce-sales-explorer.streamlit.app/). Upload the source CSV in the sidebar to explore it. The dashboard includes date, region, category, and age-group filters; sales summary metrics; interactive monthly, category, region, and shipping charts; and a filtered record table. The CSV is not included in this repository, so users need to obtain it from the linked source and check its current reuse terms.
 
 To publish it with [Streamlit Community Cloud](https://docs.streamlit.io/deploy/streamlit-community-cloud), connect your GitHub account, create an app from this repository's `main` branch, and set the app file path to `app.py`. Once deployed, add the resulting public app URL to this README and your LinkedIn project entry. The deployed app prompts each visitor to upload the CSV because the dataset is not bundled with the code.
 
