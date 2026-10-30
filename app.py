@@ -91,7 +91,10 @@ with st.sidebar:
         use_container_width=True,
     )
     st.divider()
-    st.caption("The CSV is not bundled with this app. Check the source terms before downloading or reusing it.")
+    if upload is None:
+        st.caption("No CSV is bundled with this app. Upload the source file to explore the dashboard, and check its terms before reuse.")
+    else:
+        st.caption(f"Loaded `{upload.name}` for this session. The CSV is not stored in this GitHub repository.")
 
 if upload is None:
     st.info("Upload the CSV in the sidebar to explore the dashboard.")
