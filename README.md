@@ -11,7 +11,7 @@ A reproducible exploratory analysis of a 1,000-row synthetic e-commerce transact
 
 The source is the [Kaggle e-commerce dataset](https://www.kaggle.com/datasets/brsahan/e-commerce-dataset/data?select=realistic_e_commerce_sales_data.csv). Download `realistic_e_commerce_sales_data.csv` and place it in `data/` or `/content/` in Google Colab. The data is not committed to this repository; review the source license and terms before reuse.
 
-The supplied file contains 1,000 rows and 12 columns, covers 2023-01-01 through 2024-01-03, and has no order identifier. It has 100 missing ages, 50 missing regions, 50 missing shipping statuses, and 20 rows where `Total Price` differs from `Unit Price × Quantity`. The notebook reports these data quality issues and does not silently remove high-value rows.
+The supplied file contains 1,000 rows and 12 columns, covers 2023-01-01 through 2024-01-03, and has no order identifier. It has 100 missing ages, 50 missing regions, 50 missing shipping statuses, and 20 rows where `Total Price` differs from `Unit Price × Quantity`. All 1,000 rows have valid dates, prices, and quantities. The notebook keeps missing age and region values visible as `Unknown` instead of imputing them into demographic or regional groups.
 
 ## Run
 
@@ -19,20 +19,22 @@ The supplied file contains 1,000 rows and 12 columns, covers 2023-01-01 through 
 2. Download the CSV from the source above.
 3. Open the notebook in Jupyter or Google Colab and run all cells.
 
-## Verified findings from the supplied CSV
+## Findings from the supplied data
 
-- `Total Price` is used as item sales; shipping fee is added only for the separately named customer charge measure.
-- In the supplied data, age group 36–50 has the largest total item sales after the notebook's documented median imputation for missing ages. This is a descriptive result from a synthetic sample, not evidence that age causes spending.
-- Accessories have the highest mean quantity per transaction row (about 3.06); without an order ID this is not a verified basket-size measure.
-- The highest item-sales months include November 2023, January 2023, and June 2023. The file spans only about one year, so this does not establish a recurring seasonal pattern.
-- Regional sales totals are close, and observed return rates vary by region. Counts use transaction rows because no unique order ID is supplied.
+The executed notebook completed all 11 code cells without recorded errors. Its outputs showed:
 
-Run the notebook for exact tables and charts. These findings are based on the CSV you provided; the older HTML report's claims should not be reused without checking the corresponding definitions and data-cleaning steps.
+- Accessories have the highest mean quantity per transaction row (3.06). Without an order ID this is not a verified multi-item basket measure.
+- Among records with a known age, ages 51–65 contribute the largest total item sales ($428,490). The 100 rows with missing age account for $165,440 and are shown separately as `Unknown`.
+- Among named regions, East has the largest item-sales total ($329,950), followed by North ($324,990), West ($323,390), and South ($301,040). The 50 missing-region rows account for $67,230 and are kept as `Unknown` rather than assigned to a region.
+- November 2023 has the largest monthly item-sales total ($147,150), followed by January ($141,360) and June ($129,450). The file covers only about one year, so this does not establish a recurring seasonal pattern.
+- Among rows with known shipping status, West has the highest observed return-row rate among named regions (39.9%, 95 of 238 rows). This is descriptive; rows with unknown shipping status are excluded from the denominator, and there is no unique order ID.
+
+These subgroup findings use explicit unknown categories so missing data is not silently attributed to the median age group or most common region. The underlying dataset is synthetic, so treat the results as a portfolio analysis exercise rather than real retailer evidence.
 
 ## Limitations
 
-The dataset appears synthetic and has 1,000 rows. It contains no order ID, profit, or verified customer-level identifier. A row should not be described as a complete shopping basket without evidence. Imputation can affect subgroup summaries, and shipping-status comparisons are descriptive rather than causal.
+The dataset has 1,000 rows and appears synthetic. It contains no order ID, profit, or verified customer-level identifier. A row should not be described as a complete shopping basket without evidence. Twenty rows have an arithmetic mismatch between `Total Price` and `Unit Price × Quantity`; the analysis uses the supplied `Total Price` as item sales and reports the mismatch rather than silently changing it. Shipping-status comparisons are descriptive rather than causal.
 
 ## LinkedIn project description
 
-**E-Commerce Sales Exploratory Analysis** — Analyzed a synthetic retail transaction dataset using Python and pandas. Investigated sales by age group and region, category-level quantities, monthly trends, shipping charges, and returned-row rates; documented missing values, price-total inconsistencies, and limits on interpreting basket size and seasonality.
+**E-Commerce Sales Exploratory Analysis** — Analyzed a synthetic retail transaction dataset using Python, pandas, Matplotlib, and Seaborn. Investigated sales by age group and region, category-level quantities, monthly trends, shipping charges, and returned-row rates while documenting missing values, price-total inconsistencies, and limits on interpreting basket size and seasonality.
