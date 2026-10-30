@@ -1,11 +1,12 @@
 # E-Commerce Sales Exploratory Analysis
 
-A reproducible exploratory analysis of a 1,000-row synthetic e-commerce transaction dataset. The notebook examines sales value, category quantities, regional differences, monthly patterns, shipping status, and returned transaction rows.
+A reproducible exploratory analysis and interactive dashboard for a 1,000-row synthetic e-commerce transaction dataset. Explore sales value, category quantities, regional differences, monthly patterns, shipping status, and returned transaction rows.
 
 ## Project files
 
 - [`notebooks/ecommerce_sales_eda.ipynb`](notebooks/ecommerce_sales_eda.ipynb): cleaned analysis and visualizations.
-- `requirements.txt`: Python dependencies.
+- [`app.py`](app.py): interactive Streamlit dashboard.
+- `requirements.txt`: notebook and dashboard dependencies.
 
 ## Dataset
 
@@ -21,7 +22,7 @@ The supplied file contains 1,000 rows and 12 columns, covers 2023-01-01 through 
 
 ## Findings from the supplied data
 
-Your latest Colab notebook contains saved outputs for all 11 code cells and no recorded errors. It uses the corrected handling: missing ages and regions remain `Unknown`, and rows with unknown shipping status are excluded from return-rate denominators. The findings below match its outputs. The repository notebook also checks `/content/sample_data/`, the path used in your Colab run.
+The validated notebook run completed all 11 code cells with saved outputs and no recorded errors. It uses the corrected handling: missing ages and regions remain `Unknown`, and rows with unknown shipping status are excluded from return-rate denominators. The findings below match its outputs. The repository notebook also checks `/content/sample_data/`, the path used in the Colab run.
 
 - Accessories have the highest mean quantity per transaction row (3.06). Without an order ID this is not a verified multi-item basket measure.
 - Among records with a known age, ages 51–65 contribute the largest total item sales ($428,490). The 100 rows with missing age account for $165,440 and are shown separately as `Unknown`.
@@ -35,6 +36,12 @@ These subgroup findings use explicit unknown categories so missing data is not s
 
 The dataset has 1,000 rows and appears synthetic. It contains no order ID, profit, or verified customer-level identifier. A row should not be described as a complete shopping basket without evidence. Twenty rows have an arithmetic mismatch between `Total Price` and `Unit Price × Quantity`; the analysis uses the supplied `Total Price` as item sales and reports the mismatch rather than silently changing it. Shipping-status comparisons are descriptive rather than causal.
 
+## Interactive dashboard
+
+Try the [live Streamlit dashboard](https://ecommerce-sales-explorer.streamlit.app/). Upload the source CSV in the sidebar to explore it. The dashboard includes date, region, category, and age-group filters; sales summary metrics; interactive monthly, category, region, and shipping charts; and a filtered record table. The CSV is not included in this repository, so users need to obtain it from the linked source and check its current reuse terms.
+
+To publish it with [Streamlit Community Cloud](https://docs.streamlit.io/deploy/streamlit-community-cloud), connect your GitHub account, create an app from this repository's `main` branch, and set the app file path to `app.py`. Once deployed, add the resulting public app URL to this README and your LinkedIn project entry. The deployed app prompts each visitor to upload the CSV because the dataset is not bundled with the code.
+
 ## LinkedIn project description
 
-**E-Commerce Sales Exploratory Analysis** — Analyzed a synthetic retail transaction dataset using Python, pandas, Matplotlib, and Seaborn. Investigated sales by age group and region, category-level quantities, monthly trends, shipping charges, and returned-row rates while documenting missing values, price-total inconsistencies, and limits on interpreting basket size and seasonality.
+**E-Commerce Sales Exploratory Analysis & Dashboard** — Analyzed a synthetic retail transaction dataset using Python, pandas, Matplotlib, Seaborn, Streamlit, and Plotly. Built an interactive dashboard to explore sales by month, region, category, and age group, with transparent handling of missing data and descriptive shipping outcomes. Documented price-total inconsistencies and limits on interpreting basket size and seasonality.
