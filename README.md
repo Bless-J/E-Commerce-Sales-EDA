@@ -21,7 +21,7 @@ The supplied file contains 1,000 rows and 12 columns, covers 2023-01-01 through 
 
 ## Findings from the supplied data
 
-The notebook you supplied completed all 11 code cells without recorded errors. That run imputed missing ages with the median and missing regions with the most common region, which changes subgroup summaries. The clean version now keeps those records in an `Unknown` group and excludes unknown shipping statuses from return-rate denominators. Findings below are recalculated from your CSV using these revised rules; rerun the updated notebook to regenerate matching notebook outputs.
+Your latest Colab notebook contains saved outputs for all 11 code cells and no recorded errors. It uses the corrected handling: missing ages and regions remain `Unknown`, and rows with unknown shipping status are excluded from return-rate denominators. The findings below match its outputs. The repository notebook also checks `/content/sample_data/`, the path used in your Colab run.
 
 - Accessories have the highest mean quantity per transaction row (3.06). Without an order ID this is not a verified multi-item basket measure.
 - Among records with a known age, ages 51–65 contribute the largest total item sales ($428,490). The 100 rows with missing age account for $165,440 and are shown separately as `Unknown`.
