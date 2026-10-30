@@ -10,15 +10,14 @@ A reproducible exploratory analysis and interactive dashboard for a 1,000-row sy
 
 ## Dataset
 
-The source is the [Kaggle e-commerce dataset](https://www.kaggle.com/datasets/brsahan/e-commerce-dataset/data?select=realistic_e_commerce_sales_data.csv). Download `realistic_e_commerce_sales_data.csv` and place it in `data/` or `/content/` in Google Colab. The data is not committed to this repository; review the source license and terms before reuse.
+The source is the [Kaggle e-commerce dataset](https://www.kaggle.com/datasets/brsahan/e-commerce-dataset/data?select=realistic_e_commerce_sales_data.csv), published by Batuhan Şahan. The Kaggle data card lists the dataset license as MIT. A copy is included in `data/` with attribution and the license notice in [`data/DATASET_LICENSE.md`](data/DATASET_LICENSE.md).
 
 The supplied file contains 1,000 rows and 12 columns, covers 2023-01-01 through 2024-01-03, and has no order identifier. It has 100 missing ages, 50 missing regions, 50 missing shipping statuses, and 20 rows where `Total Price` differs from `Unit Price × Quantity`. All 1,000 rows have valid dates, prices, and quantities. The notebook keeps missing age and region values visible as `Unknown` instead of imputing them into demographic or regional groups.
 
 ## Run
 
 1. Install dependencies: `pip install -r requirements.txt`.
-2. Download the CSV from the source above.
-3. Open the notebook in Jupyter or Google Colab and run all cells.
+2. Open the notebook in Jupyter or Google Colab and run all cells. It looks for the CSV in `data/`, `/content/sample_data/`, or `/content/`.
 
 ## Findings from the supplied data
 
@@ -38,9 +37,9 @@ The dataset has 1,000 rows and appears synthetic. It contains no order ID, profi
 
 ## Interactive dashboard
 
-Try the [live Streamlit dashboard](https://ecommerce-sales-explorer.streamlit.app/). Upload the source CSV in the sidebar to explore it. The dashboard includes date, region, category, and age-group filters; sales summary metrics; interactive monthly, category, region, and shipping charts; and a filtered record table. The CSV is not included in this repository, so users need to obtain it from the linked source and check its current reuse terms.
+Try the [live Streamlit dashboard](https://ecommerce-sales-explorer.streamlit.app/). It loads the included CSV automatically; visitors do not need to upload a file. An optional sidebar uploader lets them explore another compatible CSV. The dashboard includes date, region, category, and age-group filters; sales summary metrics; interactive monthly, category, region, and shipping charts; and a filtered record table.
 
-To publish it with [Streamlit Community Cloud](https://docs.streamlit.io/deploy/streamlit-community-cloud), connect your GitHub account, create an app from this repository's `main` branch, and set the app file path to `app.py`. Once deployed, add the resulting public app URL to this README and your LinkedIn project entry. The deployed app prompts each visitor to upload the CSV because the dataset is not bundled with the code.
+To publish it with [Streamlit Community Cloud](https://docs.streamlit.io/deploy/streamlit-community-cloud), connect your GitHub account, create an app from this repository's `main` branch, and set the app file path to `app.py`.
 
 ## LinkedIn project description
 
